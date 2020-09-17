@@ -57,9 +57,9 @@
     padding: $pad;
     border: 1px solid $color;
     background: $color; color: white;
-    border-radius: 10px;
+    border-radius: 10px; outline: none;
     font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
+    font-size: 14px; cursor: pointer;
     &:hover {
         background: #fff;
         color: $color;
@@ -69,12 +69,12 @@
 @mixin border($color, $pad) {
     padding: $pad;
     border: 1px solid $color;
-    background: $color; color: white;
-    border-radius: 10px;
+    background: #fff; color: $color;
+    border-radius: 10px; outline: none;
     font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
+    font-size: 14px; cursor: pointer;
     &:hover {
-        background: #fff;
-        color: $color;
+        background: $color;
+        color: white;
     }
 }
