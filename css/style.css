@@ -36,7 +36,7 @@ body, nav, header, section {
   }
 }
 
-.full, .img, header .audio .info .thumb img, header .swiper-slide .bg img, section#live .chat .list .photo img, section#schedule .jadwal .list .thumb img, section#community .community .list img, main, main .close, header > div, header .audio .info .thumb, header .swiper-slide .bg, section#live .embed iframe, section#live .chat .msg-box, .swiper-container {
+.full, .img, header .audio .info .thumb img, header .swiper-slide .bg img, section#live .chat .list .photo img, section#schedule .jadwal .list .thumb img, section#community .community .list img, main, main .close, header > div, header .audio .info .thumb, header .swiper-slide .bg, section#live .embed iframe, section#live .embed .placeholder, section#live .embed .placeholder#trans, section#live .chat .msg-box, .swiper-container {
   width: 100%;
   height: 100%;
 }
@@ -132,6 +132,128 @@ main.active {
 .menu-btn.change .bar3 {
   -webkit-transform: rotate(45deg) translate(-9px, -7px);
           transform: rotate(45deg) translate(-9px, -7px);
+}
+
+#float-player {
+  width: 100%;
+  height: 50px;
+  padding: 10px 0;
+  background: #f5f6f8;
+  position: fixed;
+  bottom: -50px;
+  z-index: 4;
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+@supports ((-webkit-backdrop-filter: blur(16px) brightness(0.9)) or (backdrop-filter: blur(16px) brightness(0.9))) {
+  #float-player {
+    background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(18px) brightness(1.2);
+            backdrop-filter: blur(18px) brightness(1.2);
+  }
+}
+
+#float-player .grid, #float-player .control, #float-player .info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+}
+
+#float-player .control {
+  height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+#float-player .control .button {
+  font-size: 14px;
+  color: #282C36;
+  padding: 0 10px;
+}
+
+#float-player .control .state .fa-pause {
+  display: none;
+}
+
+#float-player .control .state .fa-play {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#float-player .control .state.play .fa-pause {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#float-player .control .state.play .fa-play {
+  display: none;
+}
+
+#float-player .info {
+  -webkit-box-flex: 9;
+      -ms-flex: 9;
+          flex: 9;
+  padding-left: 2em;
+  margin-left: 2em;
+  border-left: 1px solid #282C36;
+}
+
+#float-player .info .bold {
+  font-weight: 600;
+}
+
+@media (max-width: 540px) {
+  #float-player .info {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  #float-player {
+    height: auto;
+    max-height: 50px;
+  }
+  #float-player .state i {
+    width: 35px;
+    height: 35px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    border-radius: 50%;
+    border: 1px solid #282C36;
+  }
+}
+
+#float-player.active {
+  bottom: 0;
 }
 
 main .form {
@@ -295,8 +417,8 @@ nav {
       -ms-flex-pack: justify;
           justify-content: space-between;
   text-transform: uppercase;
-  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
   padding: 0 clamp(2em, 4vw, 5em);
   height: auto;
   position: fixed;
@@ -543,10 +665,6 @@ header .audio .control {
   height: 20%;
   background: rgba(255, 255, 255, 0.25);
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
 }
 
 header .audio .control .button {
@@ -679,6 +797,217 @@ section#live .embed {
 section#live .embed iframe {
   position: absolute;
   top: 0;
+  z-index: 2;
+  display: none;
+}
+
+section#live .embed .placeholder {
+  position: absolute;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@-webkit-keyframes scale {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+    opacity: .75;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes scale {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+    opacity: .75;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes goup {
+  0% {
+    margin-bottom: 0;
+  }
+  50% {
+    margin-bottom: 10px;
+  }
+  80% {
+    margin-bottom: 0;
+  }
+  100% {
+    margin-bottom: 0;
+  }
+}
+
+@keyframes goup {
+  0% {
+    margin-bottom: 0;
+  }
+  50% {
+    margin-bottom: 10px;
+  }
+  80% {
+    margin-bottom: 0;
+  }
+  100% {
+    margin-bottom: 0;
+  }
+}
+
+section#live .embed .placeholder.empty {
+  z-index: 0;
+  background: #000;
+}
+
+section#live .embed .placeholder.empty h1 {
+  -webkit-animation: scale 2s ease infinite both;
+          animation: scale 2s ease infinite both;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+section#live .embed .placeholder.empty h1 .dots {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  height: 28px;
+  margin-left: 10px;
+}
+
+section#live .embed .placeholder.empty h1 .dots .list {
+  font-weight: 800;
+  font-size: 18px;
+  -webkit-animation: goup 1s ease infinite both;
+          animation: goup 1s ease infinite both;
+}
+
+section#live .embed .placeholder.empty h1 .dots .list:nth-child(1) {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+section#live .embed .placeholder.empty h1 .dots .list:nth-child(2) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+section#live .embed .placeholder.empty h1 .dots .list:nth-child(3) {
+  -webkit-animation-delay: 0.9s;
+          animation-delay: 0.9s;
+}
+
+section#live .embed .placeholder .trans {
+  -webkit-transition: .4s ease;
+  transition: .4s ease;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  z-index: 5;
+  background: #4238af;
+  background: linear-gradient(45deg, #4238af 0%, #c31560 100%);
+  bottom: 0;
+}
+
+section#live .embed .placeholder#trans {
+  content: '';
+  z-index: 10;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+section#live .embed .placeholder.open {
+  -webkit-box-pack: end !important;
+      -ms-flex-pack: end !important;
+          justify-content: flex-end !important;
+}
+
+section#live .embed .placeholder.open .trans {
+  height: 100%;
+}
+
+section#live .inweb, section#live .youtube {
+  display: none;
+}
+
+section#live .inweb.active, section#live .youtube.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section#live .youtube {
+  min-height: 250px;
+  height: 100%;
+  max-height: 470px;
+  margin-top: 2.5em;
+}
+
+section#live .youtube iframe {
+  width: 100%;
+  height: 100%;
 }
 
 section#live .chat {
@@ -711,17 +1040,35 @@ section#live .chat .swiper-slide {
   color: #93959A;
 }
 
-section#live .chat .swiper-slide.select {
+section#live .chat .swiper-slide.select, section#live .chat .swiper-slide:hover {
   color: #fff;
+  cursor: pointer;
 }
 
 section#live .chat .msg-box {
-  min-height: 250px;
-  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  min-height: 450px;
   max-height: 450px;
   overflow-y: auto;
   margin-top: 1.5em;
   padding-top: 1em;
+}
+
+section#live .chat .reverse {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 section#live .chat .list {

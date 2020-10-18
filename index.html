@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Berkat Hidup</title>
-  <script src="https://kit.fontawesome.com/0aa1f9181b.js" crossorigin="anonymous"></script>
+  <!-- <script src="https://kit.fontawesome.com/0aa1f9181b.js" crossorigin="anonymous"></script> -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -18,6 +18,7 @@
       <div class="bar3"></div>
     </div>
     <div class="menu">
+      <a href="#" class="list">Home</a>
       <a href="#" class="list">Audio</a>
       <a href="#" class="list">Live Stream</a>
       <a href="#" class="list">Podcast</a>
@@ -26,6 +27,23 @@
       <button class="cta">Login</button>
     </div>
   </nav>
+  <div id="float-player">
+    <div class="grid">
+      <div class="control">
+        <div class="button min"><i class="fas fa-volume-down"></i></div>
+        <div class="button state">
+          <i class="fas fa-play"></i>
+          <i class="fas fa-pause"></i>
+        </div>
+        <div class="button plus"><i class="fas fa-volume-up"></i></div>
+      </div>
+      <div class="info">
+        <p class="bold">Now Playing!!</p>
+        <p class="title">-- Judul Siaran --</p>
+        <p class="time">00:00</p>
+      </div>
+    </div>
+  </div>
   <main>
     <div class="form login">
       <h1>Login</h1>
@@ -115,7 +133,21 @@
       <div class="split">
         <div class="video">
           <div class="embed">
-            <iframe src="https://www.youtube.com/embed/kZ12kRS1Dao" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div id="trans" class="placeholder">
+              <div class="trans">
+                <h1>Now Watching!!</h1>
+              </div>
+            </div>
+            <iframe id="live-tv" src="https://www.youtube.com/embed/kZ12kRS1Dao" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="placeholder empty">
+              <h1>Please Standby
+                <span class="dots">
+                  <span class="list">.</span>
+                  <span class="list">.</span>
+                  <span class="list">.</span>
+                </span>
+              </h1>
+            </div>
           </div>
           <h2>Video Live Title</h2>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi ipsam blanditiis distinctio tempora id assumenda recusandae rem voluptatibus vitae voluptatum commodi, repellat consequuntur saepe optio. Itaque harum impedit qui cumque.</p>
@@ -123,43 +155,50 @@
         <div class="chat">
           <div class="title swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide select">Live Chat</div>
-              <div class="swiper-slide">Youtube Live Chat</div>
+              <div id="inweb" class="swiper-slide select">Live Chat</div>
+              <div id="youtube" class="swiper-slide">Youtube Live Chat</div>
             </div>
           </div>
-          <div class="msg-box">
-            <div class="list">
-              <div class="photo"><img src="img/thumb1.png" alt=""></div>
-              <div class="info">
-                <p class="user">Mereka</p>
-                <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
+          <div class="inweb active">
+            <div class="msg-box">
+              <div class="reverse">
+                <div class="list">
+                  <div class="photo"><img class="lazy" src="img/thumb1.png" alt=""></div>
+                  <div class="info">
+                    <p class="user">Mereka</p>
+                    <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
+                  </div>
+                </div>
+                <div class="list">
+                  <div class="photo"><img class="lazy" src="img/thumb1.png" alt=""></div>
+                  <div class="info">
+                    <p class="user">Dirinya</p>
+                    <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
+                  </div>
+                </div>
+                <div class="list">
+                  <div class="photo"><img src="img/thumb1.png" alt=""></div>
+                  <div class="info">
+                    <p class="user">Dia</p>
+                    <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
+                  </div>
+                </div>
+                <div class="list online">
+                  <div class="info">
+                    <p class="user">Diriku</p>
+                    <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
+                  </div>
+                  <div class="photo"><img src="img/thumb1.png" alt=""></div>
+                </div>
               </div>
             </div>
-            <div class="list">
-              <div class="photo"><img src="img/thumb1.png" alt=""></div>
-              <div class="info">
-                <p class="user">Dirinya</p>
-                <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
-              </div>
-            </div>
-            <div class="list">
-              <div class="photo"><img src="img/thumb1.png" alt=""></div>
-              <div class="info">
-                <p class="user">Dia</p>
-                <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
-              </div>
-            </div>
-            <div class="list online">
-              <div class="info">
-                <p class="user">Diriku</p>
-                <p class="type">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure magnam esse excepturi tempore nulla ipsa necessitatibus architecto pariatur fugit natus molestiae expedita voluptatem adipisci perferendis, quis consequuntur, beatae numquam corporis!</p>
-              </div>
-              <div class="photo"><img src="img/thumb1.png" alt=""></div>
+            <div class="pesan">
+              <textarea name="" id="" placeholder="Ketik Pesan Anda"></textarea>
+              <button class="cta">Kirim</button>
             </div>
           </div>
-          <div class="pesan">
-            <textarea name="" id="" placeholder="Ketik Pesan Anda"></textarea>
-            <button class="cta">Kirim</button>
+          <div class="youtube">
+            <iframe src="https://www.youtube.com/live_chat?is_popout=1&v=WBgg-e5TAVQ&embed_domain=127.0.0.1" frameborder="0"></iframe>
           </div>
         </div>
       </div>
@@ -347,12 +386,50 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-localScroll/2.0.0/jquery.localScroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script> 
   <script>
+    $(function() {
+       setTimeout(function(){
+        $('#trans').addClass('open');
+        setTimeout(function(){
+          $('.video iframe').css('display','flex');
+          $('#trans').addClass('open');
+          setTimeout(function(){
+            $('#trans').removeClass('open');
+              setTimeout(function(){
+              $('#trans').css('display','none');
+            },400);
+          },400);
+        },800);
+       },2000);
+    });
+
+    $(window).on("scroll", function() {
+        if($(window).scrollTop()) {
+              $('#float-player').addClass('active');  
+        } else {
+          $('#float-player').removeClass('active');
+        }
+    });
+
     $('body').localScroll();
     $('nav button').click(function(){
       $('main').addClass('active');
       $('main .login').addClass('active');
+    });
+
+    $('#inweb').click(function(){
+      $('.chat .swiper-slide').removeClass('select');
+      $('.youtube').removeClass('active');
+      $(this).addClass('select');
+      $('.inweb').addClass('active');
+    });
+
+    $('#youtube').click(function(){
+      $('.chat .swiper-slide').removeClass('select');
+      $('.inweb').removeClass('active');
+      $(this).addClass('select');
+      $('.youtube').addClass('active');
     });
 
     $('#daftar').click(function(){
@@ -371,7 +448,7 @@
     });
 
     $('.state').click(function(){
-      $(this).toggleClass("play");
+      $('.state').toggleClass("play");
     });
 
     var swiper = new Swiper('header .swiper-container', {

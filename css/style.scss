@@ -24,6 +24,33 @@
     }
 }
 
+#float-player {
+    width: 100%; height: 50px;
+    padding: 10px 0; background: $bg;
+    @supports (backdrop-filter: blur(16px) brightness(.9)){
+        background: rgba($color: $pure, $alpha: .85); backdrop-filter: blur(18px) brightness(1.2);
+    }
+    position: fixed; bottom: -50px; z-index: 4; box-shadow: 0 0 5px 0 rgba($color: $dark, $alpha: .25);
+    .grid, .control, .info { @include rata(row); justify-content: space-between; height: 100%; }
+    .control { height: 100%; flex: 1;
+        .button { font-size: 14px; color: $solid; padding: 0 10px;}
+        .state {
+            .fa-pause { display: none; } .fa-play { display: flex; }
+            &.play { .fa-pause { display: flex; }  .fa-play { display: none; }}
+        }
+    }
+    .info { flex: 9; padding-left: 2em; margin-left: 2em; border-left: 1px solid $solid; 
+        .bold { font-weight: 600;} @include max(540px) { display: none; }
+    }
+
+    @include max(540px) {
+        height: auto; max-height: 50px;
+        .state i { width: 35px; height: 35px; @include rata(row); border-radius: 50%; border: 1px solid $solid;}
+    }
+
+    &.active { bottom: 0; }
+}
+
 main {
     .form {
         @include rata(column); align-items: flex-start; border-top: 5px solid $theme1; border-bottom-right-radius: 5px;
@@ -43,7 +70,7 @@ main {
 }
 
 nav {
-    @include rata(row); justify-content: space-between; text-transform: uppercase; box-shadow: 0 0 5px 0 rgba($color: $dark, $alpha: .1); padding: 0 clamp(2em, 4vw, 5em); height: auto; position: fixed; top: 0; z-index: 5; background: $pure;
+    @include rata(row); justify-content: space-between; text-transform: uppercase; box-shadow: 0 0 5px 0 rgba($color: $dark, $alpha: .25); padding: 0 clamp(2em, 4vw, 5em); height: auto; position: fixed; top: 0; z-index: 5; background: $pure;
     .menu { height: 50px; @include rata(row); }
     .logo {
         height: 65px; &:hover { filter: brightness(1.2);}
@@ -86,8 +113,7 @@ header {
         }
         h1 { margin: 0; margin-bottom: 15px;}
         h2 { font-weight: 600; text-transform: uppercase; margin-bottom: 0;}
-        .control { @include rata(row); margin: 1em 0; width: 100%; height: 20%; background: rgba($color: $pure, $alpha: .25); border-radius: 10px; @include rata(row); 
-        
+        .control { @include rata(row); margin: 1em 0; width: 100%; height: 20%; background: rgba($color: $pure, $alpha: .25); border-radius: 10px;
             .button {
                 margin : 0 1em; padding: 10px; font-size: 18px; opacity: .75; cursor: pointer; &:hover { opacity: 1; transform: scale(.9);}
                 &.state { font-size: 27px; opacity: 1;}
@@ -131,16 +157,69 @@ section {
         .embed {
             width: 100%;
             padding-top: 56.25%; position: relative;
-            iframe { @extend .full; position: absolute; top: 0; }
+            iframe { @extend .full; position: absolute; top: 0; z-index: 2; display: none; }
+            .placeholder {
+                @keyframes scale {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.1); opacity: .75; }
+                    100% { transform: scale(1);}
+                }
+                
+                @keyframes goup {
+                    0% { margin-bottom: 0; }
+                    50% { margin-bottom: 10px; }
+                    80% { margin-bottom: 0; }
+                    100% { margin-bottom: 0; }
+                }
+
+                @extend .full; position: absolute; top: 0; @include rata(column);
+                &.empty { 
+                    z-index: 0;  background: $dark;
+                    h1 { 
+                    animation: scale 2s ease infinite both; display: flex; flex-direction: row;
+                        .dots {
+                            @include rata(row); align-items: flex-end; height: 28px; margin-left: 10px;
+                            .list { font-weight: 800; font-size: 18px; animation: goup 1s ease infinite both;
+                                @mixin transition {
+                                    @for $i from 1 through 3 {
+                                        &:nth-child(#{$i}) {
+                                            animation-delay: #{$i * .3}s;
+                                        }
+                                    }
+                                }
+                        
+                                @include transition;
+                            }
+                        }
+                    } 
+                }
+
+                .trans { transition: .4s ease; width: 100%; height: 0; overflow: hidden;
+                    @include rata(row); z-index: 5; @include grad(45deg, #4238af, #c31560); bottom: 0; 
+                }
+
+                &#trans {
+                    content: ''; @extend .full; z-index: 10; justify-content: flex-start;
+                }
+
+                &.open {
+                    justify-content: flex-end !important;
+                    .trans { height: 100%; }
+                }
+            }
         }
+
+        .inweb, .youtube { display: none; &.active { display: flex; flex-direction: column; } }
+        .youtube { min-height: 250px; height: 100%; max-height: 470px; margin-top: 2.5em; iframe { width: 100%; height: 100%;}}
 
         .chat { background: #323847; padding:  1.5em; position: relative; &::after {
             width: 100%; height: 50px; position: absolute; top: 5em; left: 0; content: ''; @include grad(0, rgba($color: $solid, $alpha: 0), $solid);
         }
             .title { height: auto;}
             .swiper-slide { width: auto; margin-right: 2em; font-size: 24px; font-weight: 600; color: $upper;}
-            .swiper-slide.select { color: $pure;}
-            .msg-box { @extend .full; min-height: 250px; height: 100%; max-height: 450px; overflow-y: auto; margin-top: 1.5em; padding-top: 1em; }
+            .swiper-slide.select, .swiper-slide:hover { color: $pure; cursor: pointer; }
+            .msg-box { @extend .full; display: flex; flex-direction: column-reverse; min-height: 450px; max-height: 450px; overflow-y: auto; margin-top: 1.5em; padding-top: 1em; }
+            .reverse { height: 100%; display: flex; flex-direction: column; }
             .list { @include grid(1fr 9fr, 1em); padding-right: 1em;
                 .photo { display: inline; height: 50px; width: 50px; border-radius: 50%; overflow: hidden; img { @extend .img; }}
                 .user { text-transform: Capitalize; font-weight: 600; color: $pure; font-size: 18px; margin: 0; margin-top: 15px;}
